@@ -53,7 +53,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     //RecyclerView
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation(libs.androidx.recyclerview)
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
     //LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
