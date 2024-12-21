@@ -54,7 +54,7 @@ dependencies {
 
     //RecyclerView
     implementation(libs.androidx.recyclerview)
-    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+    implementation(libs.androidx.recyclerview.selection)
     //LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
     //ViewModel
