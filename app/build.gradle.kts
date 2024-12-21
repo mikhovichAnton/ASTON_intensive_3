@@ -56,10 +56,10 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.recyclerview.selection)
     //LiveData
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
+    implementation(libs.androidx.lifecycle.livedata.ktx)
     //ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7")
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.savedstate)
     // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:2.6.1")
 }
