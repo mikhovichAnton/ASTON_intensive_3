@@ -52,14 +52,11 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    //RecyclerView
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.recyclerview.selection)
-    //LiveData
     implementation(libs.androidx.lifecycle.livedata.ktx)
-    //ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.savedstate)
-    // To use Kotlin annotation processing tool (kapt)
+    implementation (libs.androidx.fragment.ktx)
     kapt("androidx.room:room-compiler:2.6.1")
 }
