@@ -1,6 +1,9 @@
 package com.android.aston_intensive_3.ui
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -29,26 +32,16 @@ class MainActivity : AppCompatActivity() {
         observerInit()
         clickObserver()
 
-
-
-        for (iterator in 1..100) {
-            viewModel.addContact(
-                Contact(
-                    iterator, "Имя$iterator",
-                    "Фамилия", "Номер"
-                )
-            )
-        }
-
         with(binding) {
             buttonAdd.setOnClickListener {
                 onAddAndEditContactFragment(null)
             }
         }
+
+        onUpdateUi()
     }
 
     private fun onAddAndEditContactFragment(contact: Contact?) {
-        viewModel.clearSelectedContact()
         val fragment = EditContactFragment()
         val fragmentManager: FragmentManager = this.supportFragmentManager
         fragmentManager.apply {
@@ -85,17 +78,58 @@ class MainActivity : AppCompatActivity() {
             itemSelection.add(position)
         }
         recyclerAdapter.notifyItemChanged(position)
+        onUpdateUi()
     }
 
     private fun observerInit(){
         viewModel.contactsData.observe(this@MainActivity, Observer { contacts ->
-            recyclerAdapter.updateContactList(contacts)
+            if (contacts != null) {
+                recyclerAdapter.updateContactList(contacts)
+            }
         })
     }
 
     private fun clickObserver(){
         viewModel.choesedContact.observe(this, Observer { contact ->
-            contact?.let { onAddAndEditContactFragment(contact) }
+              contact?.let { onAddAndEditContactFragment(contact) }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.action_trash, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_trash -> {
+                onUpdateUi()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun onUpdateUi() {
+
+        with(binding){
+            buttonDelete.visibility = if (itemSelection.isNotEmpty()) View.VISIBLE else View.GONE
+            buttonCancel.visibility = if (itemSelection.isNotEmpty()) View.VISIBLE else View.GONE
+            buttonAdd.visibility = if (itemSelection.isEmpty()) View.VISIBLE else View.GONE
+
+            if (itemSelection.isNotEmpty()){
+                val itemsToDelete  = itemSelection.toList()
+                buttonDelete.setOnClickListener {
+                    viewModel.deleteContacts(itemsToDelete)
+                    itemSelection.clear()
+                    onUpdateUi()
+                }
+            }
+
+            buttonCancel.setOnClickListener {
+                itemSelection.clear()
+                onUpdateUi()
+            }
+        }
     }
 }
