@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.android.aston_intensive_3.R
 import com.android.aston_intensive_3.databinding.FragmentEditContactBinding
 import com.android.aston_intensive_3.models.Contact
 import com.android.aston_intensive_3.ui.viewmodel.ContactsViewModel
